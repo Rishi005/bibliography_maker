@@ -31,4 +31,4 @@ patches:
     patch: |-
       - op: add
         path: /spec/host
-        value: route-bibliography_maker.ext.okd-cs-test-0.k8s.cs.helsinki.fi
+        value: route-bibliography-maker.ext.okd-cs-test-0.k8s.cs.helsinki.fi

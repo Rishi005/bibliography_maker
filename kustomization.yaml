@@ -21,7 +21,7 @@ configurations:
 
 images:
   - name: source-image
-    newName: ghcr.io/Rishi005/bibliography_maker
+    newName: ghcr.io/rishi005/bibliography_maker
     newTag: latest
 
 patches:

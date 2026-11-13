@@ -21,7 +21,7 @@ configurations:
 
 images:
   - name: source-image
-    newName: ghcr.io/Rishi005/Bibliography_maker
+    newName: ghcr.io/Rishi005/bibliography_maker
     newTag: latest
 
 patches:
@@ -31,4 +31,4 @@ patches:
     patch: |-
       - op: add
         path: /spec/host
-        value: route-Bibliography_maker.ext.okd-cs-test-0.k8s.cs.helsinki.fi
+        value: route-bibliography_maker.ext.okd-cs-test-0.k8s.cs.helsinki.fi

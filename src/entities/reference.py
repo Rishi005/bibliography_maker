@@ -1,4 +1,4 @@
-class References:
+class Reference:
     def __init__(self, id, citekey, entry_type, author, title, year, publisher):
         self.id = id
         self.citekey = citekey

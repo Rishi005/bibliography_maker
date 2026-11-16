@@ -1,9 +1,12 @@
-class Todo:
-    def __init__(self, id, content, done):
+class References:
+    def __init__(self, id, citekey, entry_type, author, title, year, publisher):
         self.id = id
-        self.content = content
-        self.done = done
+        self.citekey = citekey
+        self.entry_type = entry_type
+        self.author = author
+        self.title = title
+        self.year = year
+        self.publisher = publisher
 
     def __str__(self):
-        is_done = "done" if self.done else "not done"
-        return f"{self.content}, {is_done}"
+        return f"{self.author}: {self.title} ({self.year})"

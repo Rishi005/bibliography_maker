@@ -1,5 +1,9 @@
-CREATE TABLE todos (
+CREATE TABLE refs (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  content TEXT NOT NULL,
-  done BOOLEAN DEFAULT FALSE
-)
+  citekey TEXT NOT NULL UNIQUE,
+  entry_type TEXT NOT NULL,
+  author TEXT NOT NULL,
+  title TEXT NOT NULL,
+  year INTEGER NOT NULL,
+  publisher TEXT NOT NULL
+);

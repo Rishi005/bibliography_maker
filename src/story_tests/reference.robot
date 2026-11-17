@@ -9,7 +9,7 @@ Submitting a reference saves and displays it
     Go To   ${HOME_URL}/add_reference
     Fill Text   [name="citekey"]    RobotTest01
     Fill Text   [name="title"]  Test Book
-    Fill Text   [name="author"] Test Author
+    Fill Text   [name="author"]  Test Author
     Fill Text   [name="year"]   2017
     Fill Text   [name="publisher"]  Test Publisher
     Click  button >> text=Add book

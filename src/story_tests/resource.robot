@@ -21,3 +21,13 @@ Open And Configure Browser
 
 Reset References
     Go To  ${RESET_URL}
+
+Add Reference
+    [Arguments]  ${citekey}  ${title}  ${author}  ${year}  ${publisher}
+    Go To  ${HOME_URL}/add_reference
+    Fill Text  [name="citekey"]  ${citekey}
+    Fill Text  [name="title"]  ${title}
+    Fill Text  [name="author"]  ${author}
+    Fill Text  [name="year"]  ${year}
+    Fill Text  [name="publisher"]  ${publisher}
+    Click  button >> text=Add book

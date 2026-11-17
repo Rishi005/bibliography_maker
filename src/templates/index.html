@@ -1,29 +1,30 @@
-{% extends "layout.html" %} {% block title %} Todo app {% endblock %} {% block
-body %}
+{% extends "layout.html" %}
 
-<h2>Todo app</h2>
+{% block title %}
+Bibliography maker
+{% endblock %}
 
-<div>things still unfinished: {{ unfinished }}</div>
+{% block body %}
 
+<h2>Bibliography maker</h2>
+
+<div>
+  <a href="/add_reference">Add a new reference</a>
+</div>
+
+<h3>References</h3>
+
+{% if references %}
 <ul>
-  {% for todo in todos %}
-  <li style="display: flex">
-    <div>{{ todo }}</div>
-    {% if not todo.done %}
-    <form
-      action="/toggle_todo/{{ todo.id }}"
-      method="post"
-      style="margin-left: 10px"
-    >
-      <button type="submit">mark as done</button>
-    </form>
-    {% endif %}
+  {% for reference in references %}
+  <li>
+    <strong>{{ reference.citekey }}</strong>
+    ({{ reference.entry_type }}): {{ reference }}, {{ reference.publisher }}
   </li>
   {% endfor %}
 </ul>
-
-<div>
-  <a href="/new_todo">Create new todo</a>
-</div>
+{% else %}
+<p>No references added yet.</p>
+{% endif %}
 
 {% endblock %}

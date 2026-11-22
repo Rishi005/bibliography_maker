@@ -1,4 +1,4 @@
-from flask import jsonify, redirect, render_template, request
+from flask import jsonify, redirect, render_template, request, abort
 
 from config import app, test_env
 from db_helper import reset_db
@@ -27,6 +27,26 @@ def create_reference():
         publisher=request.form["publisher"],
     )
     return redirect("/")
+
+@app.route("/edit_reference/<int:refs_id>", methods=["GET", "POST"])
+def edit_reference(refs_id):
+    reference = get_reference(refs_id)
+    if reference is None:
+        abort(404)
+
+    if request.method == "POST":
+        update_reference(
+            refs_id,
+            citekey=request.form["citekey"],
+            entry_type=request.form["entry_type"],
+            title=request.form["title"],
+            author=request.form["author"],
+            year=request.form["year"],
+            publisher=request.form["publisher"],
+        )
+        return redirect("/")
+
+    return render_template("edit_reference.html", reference=reference)
 
 
 # testausta varten oleva reitti

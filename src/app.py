@@ -3,8 +3,7 @@ from flask import jsonify, redirect, render_template, request, abort
 from config import app, test_env
 from db_helper import reset_db
 from repositories.refs_repository import create_reference as save_reference
-from repositories.refs_repository import delete_reference as remove_reference
-from repositories.refs_repository import get_reference, get_references
+from repositories.refs_repository import get_reference, get_references, delete_reference
 
 
 @app.route("/")
@@ -50,10 +49,10 @@ def edit_reference(refs_id):
     return render_template("edit_reference.html", reference=reference)
 
 @app.route("/delete_reference/<int:refs_id>",methods=["GET", "POST"])
-def delete_reference(refs_id):
+def remove_reference(refs_id):
     if request.method=="POST":
         if "remove" in request.form:
-            remove_reference(refs_id)
+            delete_reference(refs_id)
         return redirect("/")
 
     reference=get_reference(refs_id)

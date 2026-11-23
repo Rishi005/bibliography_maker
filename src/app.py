@@ -40,7 +40,7 @@ def render_form(entry_type, action, values, reference=None, errors=None, status=
 @app.route("/")
 def index():
     return render_template("index.html",
-                           references=get_references())
+        references=get_references())
 
 
 
@@ -64,7 +64,7 @@ def create_reference():
     errors = validate(fields_for(entry_type), values)
     if errors:
         return render_form(entry_type, "/create_reference", values,
-                           errors=errors, status=400)
+                errors=errors, status=400)
     save_reference(entry_type, values)
     return redirect("/")
 
@@ -82,7 +82,7 @@ def edit_reference(refs_id):
         errors = validate(fields_for(entry_type), values)
         if errors:
             return render_form(entry_type, action, values,
-                               reference=reference, errors=errors, status=400)
+                reference=reference, errors=errors, status=400)
         save_update(refs_id, values)
         return redirect("/")
 

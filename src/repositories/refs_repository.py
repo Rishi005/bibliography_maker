@@ -7,12 +7,9 @@ ALL_COLUMNS = ("id, citekey, entry_type, author, title, year, "
                "publisher, journal, volume, pages")
 
 
-def get_references(search=None):
+def get_references():
     sql = f"SELECT {ALL_COLUMNS} FROM refs"
     params = {}
-    if search:
-        sql += " WHERE author LIKE :q OR title LIKE :q OR citekey LIKE :q"
-        params["q"] = f"%{search}%"
     sql += " ORDER BY id"
     rows = db.session.execute(text(sql), params).fetchall()
     return [Reference(**row._mapping) for row in rows]

@@ -5,7 +5,7 @@ from dataclasses import dataclass
 class Field:
     name: str
     label: str
-    kind: str = "text"        # "text" | "number"
+    kind: str = "text"
     required: bool = True
 
 

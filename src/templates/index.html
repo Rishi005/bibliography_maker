@@ -20,6 +20,9 @@ Bibliography maker
   <li>
     <strong>{{ reference.citekey }}</strong>
     ({{ reference.entry_type }}): {{ reference }}, {{ reference.publisher }}
+    <form action="/delete_reference/{{ reference.id }}" method="get">
+      <button type="submit">Delete</button>
+    </form>
   </li>
   {% endfor %}
 </ul>

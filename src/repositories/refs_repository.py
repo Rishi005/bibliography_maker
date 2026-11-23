@@ -13,11 +13,22 @@ def get_references():
 
 def get_reference(refs_id):
     result = db.session.execute(
-        text("SELECT id, citekey, entry_type, author, title, year, publisher"
-        "FROM refs WHERE id = :id" {"id": refs_id})
+        text(
+            "SELECT id, citekey, entry_type, author, title, year, publisher "
+            "FROM refs WHERE id = :id"
+        ),
+        {"id": refs_id},
     )
     row = result.fetchone()
     return Reference(*row) if row else None
+
+
+def delete_reference(refs_id):
+    db.session.execute(
+        text("DELETE FROM refs WHERE id = :id"),
+        {"id": refs_id},
+    )
+    db.session.commit()
 
 
 def create_reference(citekey, entry_type, author, title, year, publisher):

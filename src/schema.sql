@@ -5,5 +5,8 @@ CREATE TABLE refs (
   author TEXT NOT NULL,
   title TEXT NOT NULL,
   year INTEGER NOT NULL,
-  publisher TEXT NOT NULL
+  publisher TEXT,
+  journal TEXT,
+  volume TEXT,
+  pages TEXT
 );

@@ -3,54 +3,42 @@ from sqlalchemy import text
 from config import db
 from entities.reference import Reference
 
+ALL_COLUMNS = ("id, citekey, entry_type, author, title, year, "
+               "publisher, journal, volume, pages")
 
-def get_references():
-    result = db.session.execute(
-        text("SELECT id, citekey, entry_type, author, title, year, publisher FROM refs")
-    )
-    refs = result.fetchall()
-    return [Reference(*ref) for ref in refs]
+
+def get_references(search=None):
+    sql = f"SELECT {ALL_COLUMNS} FROM refs"
+    params = {}
+    if search:
+        sql += " WHERE author LIKE :q OR title LIKE :q OR citekey LIKE :q"
+        params["q"] = f"%{search}%"
+    sql += " ORDER BY id"
+    rows = db.session.execute(text(sql), params).fetchall()
+    return [Reference(**row._mapping) for row in rows]
+
 
 def get_reference(refs_id):
-    result = db.session.execute(
-        text("SELECT id, citekey, entry_type, author, title, year, publisher"
-        "FROM refs WHERE id = :id" {"id": refs_id})
-    )
-    row = result.fetchone()
-    return Reference(*row) if row else None
+    row = db.session.execute(
+        text(f"SELECT {ALL_COLUMNS} FROM refs WHERE id = :id"), {"id": refs_id}
+    ).fetchone()
+    return Reference(**row._mapping) if row else None
 
 
-def create_reference(citekey, entry_type, author, title, year, publisher):
-    sql = text(
-        "INSERT INTO refs (citekey, entry_type, author, title, year, publisher) "
-        "VALUES (:citekey, :entry_type, :author, :title, :year, :publisher)"
-    )
+def create_reference(entry_type, values):
+    columns = ["entry_type"] + list(values.keys())
+    placeholders = ", ".join(f":{c}" for c in columns)
     db.session.execute(
-        sql,
-        {
-            "citekey": citekey,
-            "entry_type": entry_type,
-            "author": author,
-            "title": title,
-            "year": year,
-            "publisher": publisher,
-        },
+        text(f"INSERT INTO refs ({', '.join(columns)}) VALUES ({placeholders})"),
+        {"entry_type": entry_type, **values},
     )
     db.session.commit()
 
-def update_reference(refs_id, citekey, entry_type, author, title, year, publisher):
-    sql = text(
-        "UPDATE refs SET citekey = :citekey, entry_type = :entry_type, "
-        "author = :author, title = :title, year = :year, publisher = :publisher "
-        "WHERE id = :id"
+
+def update_reference(refs_id, values):
+    assignments = ", ".join(f"{c} = :{c}" for c in values.keys())
+    db.session.execute(
+        text(f"UPDATE refs SET {assignments} WHERE id = :id"),
+        {**values, "id": refs_id},
     )
-    db.session.execute(sql, {
-        "id": refs_id,
-        "citekey": citekey,
-        "entry_type": entry_type,
-        "author": author,
-        "title": title,
-        "year": year,
-        "publisher": publisher,
-    })
     db.session.commit()

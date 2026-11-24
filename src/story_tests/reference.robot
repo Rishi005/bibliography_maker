@@ -44,3 +44,11 @@ Front page has a link to the add reference form
     Go To  ${HOME_URL}
     Click  a >> text=Add a new reference
     Get Url  ==  ${HOME_URL}/add_reference
+
+Deleting a reference removes it from the list
+    Add Reference  RobotTest02  Book  Author  2008  Publisher
+    Click  li >> button
+    Get Text  body  *=  RobotDelete01
+    Click  input[name="remove"]
+    Get Element Count  li  ==  0
+    Get Text  body  *=  No references added yet.

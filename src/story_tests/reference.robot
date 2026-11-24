@@ -60,3 +60,11 @@ Cancel on the reference form returns to the front page without saving
     Click  a >> text=Cancel
     Get Url  ==  ${HOME_URL}/
     Get Text  body  *=  No references found.
+
+References can be shown in BibTeX format
+    Add Reference  RobotBib01  Bib Book  Bib Author  2003  Bib Publisher
+    Go To  ${HOME_URL}
+    Click  a >> text=Show references in BibTeX format
+    Get Url  ==  ${HOME_URL}/bibtex
+    Get Text  pre  *=  @book{RobotBib01,
+    Get Text  pre  *=  publisher = {Bib Publisher},

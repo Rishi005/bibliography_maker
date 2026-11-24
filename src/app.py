@@ -1,5 +1,6 @@
 from flask import jsonify, redirect, render_template, request, abort
 
+from bibtex import to_bibtex
 from config import app, test_env
 from db_helper import reset_db
 from entry_types import ENTRY_TYPES, fields_for, detail_fields
@@ -89,6 +90,12 @@ def edit_reference(refs_id):
     values = {f.name: getattr(reference, f.name)
               for f in fields_for(entry_type)}
     return render_form(entry_type, action, values, reference=reference)
+
+
+@app.route("/bibtex")
+def bibtex():
+    entries = [to_bibtex(reference) for reference in get_references()]
+    return render_template("bibtex.html", entries=entries)
 
 
 if test_env:

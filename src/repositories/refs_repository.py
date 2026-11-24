@@ -4,7 +4,7 @@ from config import db
 from entities.reference import Reference
 
 ALL_COLUMNS = ("id, citekey, entry_type, author, title, year, "
-               "publisher, journal, volume, pages")
+               "publisher, journal, volume, pages, booktitle, editor")
 
 
 def get_references():

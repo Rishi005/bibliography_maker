@@ -8,6 +8,7 @@ from repositories.refs_repository import (
     get_references,
     get_reference,
     update_reference as save_update,
+    delete_reference
 )
 
 app.jinja_env.globals["detail_fields"] = detail_fields
@@ -90,6 +91,17 @@ def edit_reference(refs_id):
               for f in fields_for(entry_type)}
     return render_form(entry_type, action, values, reference=reference)
 
+@app.route("/delete_reference/<int:refs_id>",methods=["GET", "POST"])
+def remove_reference(refs_id):
+    if request.method=="POST":
+        if "remove" in request.form:
+            delete_reference(refs_id)
+        return redirect("/")
+
+    reference=get_reference(refs_id)
+    if reference is None:
+        abort(404)
+    return render_template("delete_reference.html",reference=reference)
 
 if test_env:
     @app.route("/reset_db")

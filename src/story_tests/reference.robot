@@ -60,3 +60,11 @@ Cancel on the reference form returns to the front page without saving
     Click  a >> text=Cancel
     Get Url  ==  ${HOME_URL}/
     Get Text  body  *=  No references found.
+
+Deleting a reference removes it from the list
+    Add Reference  RobotTest02  Book  Author  2008  Publisher
+    Click  li >> a >> text=Delete
+    Get Text  body  *=  RobotTest02
+    Click  input[name="remove"]
+    Get Element Count  li  ==  0
+    Get Text  body  *=  No references found.

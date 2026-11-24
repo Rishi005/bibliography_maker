@@ -39,3 +39,10 @@ def update_reference(refs_id, values):
         {**values, "id": refs_id},
     )
     db.session.commit()
+
+def delete_reference(refs_id):
+    db.session.execute(
+        text("DELETE FROM refs WHERE id = :id"),
+        {"id": refs_id},
+    )
+    db.session.commit()

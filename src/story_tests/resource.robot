@@ -21,6 +21,7 @@ Open And Configure Browser
 
 Reset References
     Go To  ${RESET_URL}
+    Get Text  body  *=  db reset
 
 Add Reference
     [Arguments]  ${citekey}  ${title}  ${author}  ${year}  ${publisher}

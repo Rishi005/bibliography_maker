@@ -29,6 +29,15 @@ ENTRY_TYPES = {
             Field("pages", "Pages", required=False),
         ],
     },
+    "inproceedings": {
+        "label": "Inproceedings",
+        "fields": COMMON + [
+            Field("booktitle", "Booktitle"),
+            Field("editor", "Editor", required=False),
+            Field("pages", "Pages", required=False),
+            Field("publisher", "Publisher", required=False),
+        ],
+    },
 }
 
 SUMMARY_FIELDS = {"citekey", "author", "title", "year"}

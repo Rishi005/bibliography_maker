@@ -17,6 +17,7 @@
     ({{ reference.entry_type }}): {{ reference }}
     {% for label, value in detail_fields(reference) %}, {{ label }}: {{ value }}{% endfor %}
     <a href="/edit_reference/{{ reference.id }}">Edit</a>
+    <a href="/delete_reference/{{ reference.id }}">Delete</a>
   </li>
   {% endfor %}
 </ul>

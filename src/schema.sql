@@ -8,5 +8,7 @@ CREATE TABLE refs (
   publisher TEXT,
   journal TEXT,
   volume TEXT,
-  pages TEXT
+  pages TEXT,
+  booktitle TEXT,
+  editor TEXT
 );

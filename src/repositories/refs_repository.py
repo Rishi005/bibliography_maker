@@ -4,7 +4,7 @@ from config import db
 from entities.reference import Reference
 
 ALL_COLUMNS = ("id, citekey, entry_type, author, title, year, "
-               "publisher, journal, volume, pages")
+               "publisher, journal, volume, pages, booktitle, editor")
 
 
 def get_references():
@@ -37,5 +37,12 @@ def update_reference(refs_id, values):
     db.session.execute(
         text(f"UPDATE refs SET {assignments} WHERE id = :id"),
         {**values, "id": refs_id},
+    )
+    db.session.commit()
+
+def delete_reference(refs_id):
+    db.session.execute(
+        text("DELETE FROM refs WHERE id = :id"),
+        {"id": refs_id},
     )
     db.session.commit()

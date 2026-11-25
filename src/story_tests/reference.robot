@@ -68,3 +68,11 @@ References can be shown in BibTeX format
     Get Url  ==  ${HOME_URL}/bibtex
     Get Text  pre  *=  @book{RobotBib01,
     Get Text  pre  *=  publisher = {Bib Publisher},
+    
+Deleting a reference removes it from the list
+    Add Reference  RobotTest02  Book  Author  2008  Publisher
+    Click  li >> a >> text=Delete
+    Get Text  body  *=  RobotTest02
+    Click  input[name="remove"]
+    Get Element Count  li  ==  0
+    Get Text  body  *=  No references found.

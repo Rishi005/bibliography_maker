@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}References in BibTeX format{% endblock %}
+{% block body %}
+
+<h2>References in BibTeX format</h2>
+
+<div><a href="/">Back to references</a></div>
+
+{% if entries %}
+<pre>{% for entry in entries %}{{ entry }}
+
+{% endfor %}</pre>
+{% else %}
+<p>No references found.</p>
+{% endif %}
+
+{% endblock %}

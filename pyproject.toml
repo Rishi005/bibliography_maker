@@ -26,3 +26,6 @@ dev = [
 
 [tool.uv]
 package = false
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "B"]

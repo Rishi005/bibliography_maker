@@ -14,7 +14,7 @@ Submitting a reference saves and displays it
     Fill Text   [name="publisher"]  Test Publisher
     Click  button >> text=Save
     Get Text  body  *=  RobotTest01
-    
+
 
 Empty inputs are denied
     Go To  ${HOME_URL}/add_reference?entry_type=book
@@ -66,9 +66,9 @@ References can be shown in BibTeX format
     Go To  ${HOME_URL}
     Click  a >> text=Show references in BibTeX format
     Get Url  ==  ${HOME_URL}/bibtex
-    Get Text  pre  *=  @book{RobotBib01,
+    Get Text  pre  *=  @book{RobotBib01},
     Get Text  pre  *=  publisher = {Bib Publisher},
-    
+
 Deleting a reference removes it from the list
     Add Reference  RobotTest02  Book  Author  2008  Publisher
     Click  li >> a >> text=Delete

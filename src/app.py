@@ -1,16 +1,12 @@
-from flask import jsonify, redirect, render_template, request, abort
+from flask import abort, jsonify, redirect, render_template, request
 
 from bibtex import to_bibtex
 from config import app, test_env
 from db_helper import reset_db
-from entry_types import ENTRY_TYPES, fields_for, detail_fields
-from repositories.refs_repository import (
-    create_reference as save_reference,
-    get_references,
-    get_reference,
-    update_reference as save_update,
-    delete_reference
-)
+from entry_types import ENTRY_TYPES, detail_fields, fields_for
+from repositories.refs_repository import create_reference as save_reference
+from repositories.refs_repository import delete_reference, get_reference, get_references
+from repositories.refs_repository import update_reference as save_update
 
 app.jinja_env.globals["detail_fields"] = detail_fields
 

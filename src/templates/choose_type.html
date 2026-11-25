@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}Add a reference{% endblock %}
+{% block body %}
+
+<h2>Add a reference</h2>
+
+<form action="/add_reference" method="get">
+  <label>Type of reference
+    <select name="entry_type">
+      {% for key, spec in entry_types.items() %}
+      <option value="{{ key }}">{{ spec.label }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <button type="submit">Continue</button>
+  <a href="/" id="cancel">Cancel</a>
+</form>
+
+{% endblock %}

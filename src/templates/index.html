@@ -1,16 +1,11 @@
 {% extends "layout.html" %}
-
-{% block title %}
-Bibliography maker
-{% endblock %}
-
+{% block title %}Bibliography maker{% endblock %}
 {% block body %}
 
 <h2>Bibliography maker</h2>
 
-<div>
-  <a href="/add_reference">Add a new reference</a>
-</div>
+<div><a href="/add_reference">Add a new reference</a></div>
+<div><a href="/bibtex">Show references in BibTeX format</a></div>
 
 <h3>References</h3>
 
@@ -19,12 +14,15 @@ Bibliography maker
   {% for reference in references %}
   <li>
     <strong>{{ reference.citekey }}</strong>
-    ({{ reference.entry_type }}): {{ reference }}, {{ reference.publisher }}
+    ({{ reference.entry_type }}): {{ reference }}
+    {% for label, value in detail_fields(reference) %}, {{ label }}: {{ value }}{% endfor %}
+    <a href="/edit_reference/{{ reference.id }}">Edit</a>
+    <a href="/delete_reference/{{ reference.id }}">Delete</a>
   </li>
   {% endfor %}
 </ul>
 {% else %}
-<p>No references added yet.</p>
+<p>No references found.</p>
 {% endif %}
 
 {% endblock %}

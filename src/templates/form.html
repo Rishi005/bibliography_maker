@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}{{ "Edit reference" if reference else "Add a reference" }}{% endblock %}
+{% block body %}
+
+<h2>{{ "Edit reference" if reference else "Add a reference" }}</h2>
+
+{% if errors %}
+<ul class="errors">{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>
+{% endif %}
+
+<form action="{{ action }}" method="post">
+  <input type="hidden" name="entry_type" value="{{ entry_type }}">
+  {% for field in fields %}
+  <label>{{ field.label }}
+    <input name="{{ field.name }}"
+           {% if field.kind == "number" %}type="number"{% endif %}
+           value="{{ values.get(field.name) or '' }}"
+           {% if field.required %}required{% endif %}>
+  </label>
+  {% endfor %}
+  <button type="submit">Save</button>
+  <a href="/" id="cancel">Cancel</a>
+</form>
+
+{% endblock %}

@@ -42,8 +42,8 @@ def render_form(entry_type, action, values, reference=None, errors=None, status=
 @app.route("/")
 def index():
     return render_template("index.html",
-        references=get_references())
-
+        references=get_references()
+    )
 
 
 @app.route("/add_reference")

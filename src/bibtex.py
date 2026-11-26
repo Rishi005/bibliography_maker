@@ -2,7 +2,7 @@ from entry_types import fields_for
 
 
 def to_bibtex(reference):
-    lines = [f"@{reference.entry_type}{{{reference.citekey},"]
+    lines = [f"@{reference.entry_type}{{{reference.citekey}}},"]
     for field in fields_for(reference.entry_type):
         value = getattr(reference, field.name)
         if field.name != "citekey" and value:
